@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Website</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 70px; /* Adjust for fixed navbar */
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Section Styles */
+        #hollywood {
+            background-color: #d9534f; /* Bootstrap Danger (Red) */
+            color: #fff;
+        }
+
+        #bollywood {
+            background-color: #5bc0de; /* Bootstrap Info (Blue) */
+            color: #fff;
+        }
+
+        #tollywood {
+            background-color: #f0ad4e; /* Bootstrap Warning (Orange) */
+            color: #fff;
+        }
+
+        #mollywood {
+            background-color: #5cb85c; /* Bootstrap Success (Green) */
+            color: #fff;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .movie-card {
+            margin-bottom: 20px;
+        }
+
+        .movie-card img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Movies Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#hollywood">Hollywood</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#bollywood">Bollywood</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tollywood">Tollywood</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#mollywood">Mollywood</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#rating">Rating</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="d-flex align-items-center" style="height: 100vh; background: #f8f9fa;">
+        <div class="container text-center">
+            <h1 class="display-4">This is Cinema.</h1>
+        </div>
+    </section>
+
+    <!-- Hollywood Section -->
+    <section id="hollywood" class="py-5">
+        <div class="container text-center">
+            <h2 class="section-heading">Hollywood Movies</h2>
+            <div class="row justify-content-center" id="hollywood-list">
+                <!-- Hollywood movies will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bollywood Section -->
+    <section id="bollywood" class="py-5">
+        <div class="container text-center">
+            <h2 class="section-heading">Bollywood Movies</h2>
+            <div class="row justify-content-center" id="bollywood-list">
+                <!-- Bollywood movies will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Tollywood Section -->
+    <section id="tollywood" class="py-5">
+        <div class="container text-center">
+            <h2 class="section-heading">Tollywood Movies</h2>
+            <div class="row justify-content-center" id="tollywood-list">
+                <!-- Tollywood movies will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Mollywood Section -->
+    <section id="mollywood" class="py-5">
+        <div class="container text-center">
+            <h2 class="section-heading">Mollywood Movies</h2>
+            <div class="row justify-content-center" id="mollywood-list">
+                <!-- Mollywood movies will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Rating Section -->
+    <section id="rating" class="py-5">
+        <div class="container">
+            <h2>Rate a Movie</h2>
+            <form id="movie-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="movieName">Movie Name</label>
+                        <input type="text" class="form-control" id="movieName" placeholder="Enter movie name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="rating">Rating</label>
+                        <input type="number" class="form-control" id="rating" placeholder="Enter rating (1-10)" min="1" max="10" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sectionSelect">Select Section</label>
+                        <select id="sectionSelect" class="form-control" required>
+                            <option value="">Choose...</option>
+                            <option value="hollywood">Hollywood</option>
+                            <option value="bollywood">Bollywood</option>
+                            <option value="tollywood">Tollywood</option>
+                            <option value="mollywood">Mollywood</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Movie</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('movie-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const movieName = document.getElementById('movieName').value;
+                const rating = document.getElementById('rating').value;
+                const section = document.getElementById('sectionSelect').value;
+
+                if (movieName && rating && section) {
+                    addMovieToList(movieName, rating, section);
+                    alert('Movie added successfully!');
+                    document.getElementById('movie-form').reset();
+                } else {
+                    alert('Please enter both movie name, rating and select a section.');
+                }
+            });
+
+            function addMovieToList(movieName, rating, section) {
+                let sectionId = '';
+                let sectionColor = '';
+                let sectionImage = '';
+
+                switch(section) {
+                    case 'hollywood':
+                        sectionId = 'hollywood-list';
+                        sectionColor = '#d9534f'; // Bootstrap Danger (Red)
+                        sectionImage = 'hollywood.jpg'; // Placeholder image
+                        break;
+                    case 'bollywood':
+                        sectionId = 'bollywood-list';
+                        sectionColor = '#5bc0de'; // Bootstrap Info (Blue)
+                        sectionImage = 'bollywood.jpg'; // Placeholder image
+                        break;
+                    case 'tollywood':
+                        sectionId = 'tollywood-list';
+                        sectionColor = '#f0ad4e'; // Bootstrap Warning (Orange)
+                        sectionImage = 'tollywood.jpg'; // Placeholder image
+                        break;
+                    case 'mollywood':
+                        sectionId = 'mollywood-list';
+                        sectionColor = '#5cb85c'; // Bootstrap Success (Green)
+                        sectionImage = 'mollywood.jpg'; // Placeholder image
+                        break;
+                    default:
+                        break;
+                }
+
+                const sectionList = document.getElementById(sectionId);
+                if (sectionList) {
+                    const newCard = `
+                        <div class="col-md-4 mb-4 movie-card">
+                            <div class="card">
+                                <img src="${sectionImage}" class="card-img-top" alt="${section} Movie">
+                                <div class="card-body">
+                                    <h5 class="card-title">${movieName}</h5>
+                                    <p class="card-text">Rating: ${rating}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    sectionList.insertAdjacentHTML('beforeend', newCard);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
